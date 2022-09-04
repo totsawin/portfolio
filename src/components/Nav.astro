@@ -1,0 +1,175 @@
+---
+import config from "./config.js";
+// import Menu from "./Menu.astro";
+import { IconLogo } from "./icons/index.js";
+const { navLinks } = config;
+export interface Props {
+  isHome: boolean;
+}
+const { isHome = true } = Astro.props;
+---
+
+<header>
+    <nav>
+        <div class="logo" tabIndex="-1">
+            <a href="/" aria-label="home">
+                <IconLogo />
+            </a>
+        </div>
+        <div class="links">
+            <ol>
+                {navLinks &&
+                navLinks.map(({ url, name }) => (
+                    <li>
+                        <a href={url}>{name}</a>
+                    </li>
+                ))}
+            </ol>
+            <div>
+                <a class="resume-button" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+                    Resume
+                </a>
+            </div>
+        </div>
+
+        <!-- <Menu /> -->
+    </nav>
+</header>
+
+<style lang="scss">
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        z-index: 11;
+        padding: 0px 50px;
+        width: 100%;
+        height: var(--nav-height);
+        background-color: rgba(10, 25, 47, 0.85);
+        filter: none !important;
+        pointer-events: auto !important;
+        user-select: auto !important;
+        backdrop-filter: blur(10px);
+        transition: var(--transition);
+
+        @media (max-width: 1080px) {
+            padding: 0 40px;
+        }
+        @media (max-width: 768px) {
+            padding: 0 25px;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .scroll-up {
+                height: var(--nav-scroll-height);
+                transform: translateY(0px);
+                background-color: rgba(10, 25, 47, 0.85);
+                box-shadow: 0 10px 30px -10px var(--navy-shadow);
+            }
+            .scroll-down {
+                height: var(--nav-scroll-height);
+                transform: translateY(calc(var(--nav-scroll-height) * -1));
+                box-shadow: 0 10px 30px -10px var(--navy-shadow);
+            }
+        }
+    }
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        color: var(--lightest-slate);
+        font-family: var(--font-mono);
+        counter-reset: item 0;
+        z-index: 12;
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            a {
+                color: var(--green);
+                width: 42px;
+                height: 42px;
+
+                &:hover,
+                &:focus {
+                    :global(svg) {
+                        fill: var(--green-tint);
+                    }
+                }
+
+                :global(svg) {
+                    fill: none;
+                    transition: var(--transition);
+                    user-select: none;
+                }
+            }
+        }
+    }
+    .links {
+        display: flex;
+        align-items: center;
+
+        @media (max-width: 768px) {
+            display: none;
+        }
+
+        ol {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+            li {
+            margin: 0 5px;
+            position: relative;
+            counter-increment: item 1;
+            font-size: var(--fz-xs);
+
+                a {
+                    padding: 10px;
+
+                    &:before {
+                    content: '0' counter(item) '.';
+                    margin-right: 5px;
+                    color: var(--green);
+                    font-size: var(--fz-xxs);
+                    text-align: right;
+                    }
+                }
+            }
+        }
+
+        .resume-button {
+            color: var(--green);
+            background-color: transparent;
+            border: 1px solid var(--green);
+            border-radius: var(--border-radius);
+            padding: 0.75rem 1rem;
+            font-size: var(--fz-xs);
+            font-family: var(--font-mono);
+            line-height: 1;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: var(--green-tint);
+                outline: none;
+            }
+            &:after {
+                display: none !important;
+            }
+            margin-left: 15px;
+            font-size: var(--fz-xs);
+        }
+    }
+</style>

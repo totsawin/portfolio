@@ -1,0 +1,54 @@
+---
+export interface Props {
+  isHome: boolean;
+  orientation: string;
+}
+const { isHome = true,  orientation } = Astro.props;
+let leftPosition, rightPosition;
+if(orientation === 'left'){
+  leftPosition = '40px';
+  rightPosition = 'auto';
+} else {
+  leftPosition = 'auto';
+  rightPosition = '40px';
+}
+---
+
+<div class="side-element">
+    <slot />
+</div>
+
+
+<style lang="scss" define:vars={{ leftPosition, rightPosition }}>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .side-element {
+    width: 40px;
+    position: fixed;
+    bottom: 0;
+    left: var(--leftPosition);
+    right: var(--rightPosition);
+    z-index: 10;
+    color: var(--light-slate);
+
+    @media (max-width: 1080px) {
+      left: calc(var(--leftPosition) / 2);
+      right: calc(var(--rightPosition) / 2);
+    }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      animation: fade-in 500ms ease-out;
+      animation-delay: 2000ms;
+      animation-fill-mode: backwards;
+    }
+  }
+  </style>

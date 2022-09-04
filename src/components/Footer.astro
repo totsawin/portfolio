@@ -1,0 +1,125 @@
+---
+import config from './config.js';
+import Icon from './icons/icon.astro';
+export interface GithubInfo {
+    stars: number;
+    forks: number;
+}
+const { socialMedia } = config
+const response = await fetch("https://api.github.com/repos/bchiang7/v4");
+const data = await response.json();
+const { stargazers_count, forks_count } = data;
+const githubInfo: GithubInfo = {
+    stars: stargazers_count,
+    forks: forks_count
+};
+---
+
+<footer>
+    <div class="social-links">
+        <ul>
+            {
+                socialMedia &&
+                socialMedia.map(({ name, url }) => (
+                        <li>
+                            <a href={url} aria-label={name}>
+                                <span class="icon"><Icon name={name}/></span>
+                            </a>
+                        </li>
+                    ))
+            }
+        </ul>
+    </div>
+
+    <div class="credit" tabindex="-1">
+        <a href="https://github.com/bchiang7/v4">
+            <div>Designed &amp; Built by Brittany Chiang</div>
+
+            {
+                githubInfo.stars && githubInfo.forks && (
+                    <div class="github-stats">
+                        <span>
+                            <span class="icon"><Icon  name="Star" /></span>
+                            <span>{githubInfo.stars.toLocaleString()}</span>
+                        </span>
+                        <span>
+                            <span class="icon"><Icon name="Fork" /></span>
+                            <span>{githubInfo.forks.toLocaleString()}</span>
+                        </span>
+                    </div>
+                )
+            }
+        </a>
+    </div>
+</footer>
+
+<style lang="scss">
+    footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: auto;
+        min-height: 70px;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .social-links {
+        display: none;
+
+        @media (max-width: 768px) {
+            display: block;
+            width: 100%;
+            max-width: 270px;
+            margin: 0 auto 10px;
+            color: var(--light-slate);
+        }
+
+        ul {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+            a {
+                padding: 10px;
+
+                .icon {
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+        }
+    }
+
+    .credit {
+        color: var(--light-slate);
+        font-family: var(--font-mono);
+        font-size: var(--fz-xxs);
+        line-height: 1;
+
+        a {
+            padding: 10px;
+        }
+
+        .github-stats {
+            margin-top: 10px;
+
+            & > span {
+                display: inline-flex;
+                align-items: center;
+                margin: 0 7px;
+            }
+            .icon {
+                display: inline-block;
+                margin-right: 5px;
+                width: 14px;
+                height: 14px;
+            }
+        }
+    }
+</style>
