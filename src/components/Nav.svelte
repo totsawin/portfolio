@@ -1,13 +1,10 @@
----
-import config from "./config.js";
-// import Menu from "./Menu.astro";
-import { IconLogo } from "./icons/index.js";
-const { navLinks } = config;
-export interface Props {
-  isHome: boolean;
-}
-const { isHome = true } = Astro.props;
----
+<script lang="ts">
+    import config from "./config.js";
+    // import Menu from "./Menu.astro";
+    import { IconLogo } from "./icons/index.js";
+    const { navLinks } = config;
+    // export let isHome;
+</script>
 
 <header>
     <nav>
@@ -18,12 +15,11 @@ const { isHome = true } = Astro.props;
         </div>
         <div class="links">
             <ol>
-                {navLinks &&
-                navLinks.map(({ url, name }) => (
+                {#each navLinks as { url, name }}
                     <li>
                         <a href={url}>{name}</a>
                     </li>
-                ))}
+                {/each}
             </ol>
             <div>
                 <a class="resume-button" href="/resume.pdf" target="_blank" rel="noopener noreferrer">

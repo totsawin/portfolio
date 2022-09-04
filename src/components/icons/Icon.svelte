@@ -1,4 +1,4 @@
----
+<script>
 import {
   IconAppStore,
   IconBookmark,
@@ -15,10 +15,7 @@ import {
   IconStar,
   IconTwitter,
 } from './index.js';
-export interface Props {
-  name: string;
-}
-const { name } = Astro.props;
+export let name;
 let Component;
 switch (name) {
     case 'AppStore':
@@ -65,5 +62,5 @@ switch (name) {
     default:
         Component = IconExternal;
 };
----
+</script>
 <Component />
