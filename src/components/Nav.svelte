@@ -3,10 +3,44 @@
     // import Menu from "./Menu.astro";
     import { IconLogo } from "./icons/index.js";
     const { navLinks } = config;
+    import { onMount, onDestroy } from 'svelte';
     // export let isHome;
+    const isRenderingOnServer = typeof window === 'undefined';
+    let lastScrollY = isRenderingOnServer ? 0: window.pageYOffset;
+    let scrollDirection = 'down';
+    let scrolledToTop = true;
+
+    onMount(() => {
+        if(isRenderingOnServer){
+            return;
+        }
+		window.addEventListener('scroll', handleScroll);
+	});
+
+    onDestroy(() => {
+        if(isRenderingOnServer){
+            return;
+        }
+		window.removeEventListener('scroll', handleScroll);
+	});
+    
+    function handleScroll() {
+        const scrollY = window.pageYOffset;
+        scrolledToTop = isScrolledToTop(scrollY)
+        scrollDirection = getScrollDirection(scrollY);
+        lastScrollY = scrollY > 0 ? scrollY : 0;
+    }
+    function isScrolledToTop(scrollY: number) {
+        return scrollY < 50;
+    }
+    function getScrollDirection(scrollY: number) {
+        const SCROLL_UP = 'up';
+        const SCROLL_DOWN = 'down';
+        return scrollY > lastScrollY ? SCROLL_DOWN : SCROLL_UP;
+    }
 </script>
 
-<header>
+<header class="{scrolledToTop ? '': (scrollDirection === 'up' ? 'scroll-up' : 'scroll-down')}">
     <nav>
         <div class="logo" tabIndex="-1">
             <a href="/" aria-label="home">
@@ -15,13 +49,13 @@
         </div>
         <div class="links">
             <ol>
-                {#each navLinks as { url, name }}
-                    <li>
+                {#each navLinks as { url, name }, index}
+                    <li style:--delay-items={index}>
                         <a href={url}>{name}</a>
                     </li>
                 {/each}
             </ol>
-            <div>
+            <div class="resume-button-section" style:--delay-items={navLinks.length}>
                 <a class="resume-button" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
                     Resume
                 </a>
@@ -33,7 +67,27 @@
 </header>
 
 <style lang="scss">
+    @keyframes fade {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fade-down {
+        from {
+            opacity: 0.01;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+    }
     header {
+        --delay-items: 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -105,6 +159,12 @@
                     user-select: none;
                 }
             }
+
+            @media (prefers-reduced-motion: no-preference) {
+                animation: fade 300ms var(--easing);
+                animation-delay: 2000ms;
+                animation-fill-mode: backwards;
+            }
         }
     }
     .links {
@@ -124,10 +184,10 @@
             list-style: none;
 
             li {
-            margin: 0 5px;
-            position: relative;
-            counter-increment: item 1;
-            font-size: var(--fz-xs);
+                margin: 0 5px;
+                position: relative;
+                counter-increment: item 1;
+                font-size: var(--fz-xs);
 
                 a {
                     padding: 10px;
@@ -140,6 +200,20 @@
                     text-align: right;
                     }
                 }
+
+                @media (prefers-reduced-motion: no-preference) {
+                    animation: fade-down 300ms var(--easing);
+                    animation-delay: calc(2000ms + var(--delay-items) * 100ms);
+                    animation-fill-mode: backwards;
+                }
+            }
+        }
+
+        .resume-button-section {
+            @media (prefers-reduced-motion: no-preference) {
+                animation: fade-down 300ms var(--easing);
+                animation-delay: calc(2000ms + var(--delay-items) * 100ms);
+                animation-fill-mode: backwards;
             }
         }
 
