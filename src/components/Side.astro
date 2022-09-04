@@ -20,7 +20,7 @@ if(orientation === 'left'){
 
 
 <style lang="scss" define:vars={{ leftPosition, rightPosition }}>
-  @keyframes fade-in {
+  @keyframes fade {
     from {
       opacity: 0;
     }
@@ -46,7 +46,7 @@ if(orientation === 'left'){
       display: none;
     }
     @media (prefers-reduced-motion: no-preference) {
-      animation: fade-in 500ms ease-out;
+      animation: fade 300ms var(--easing);
       animation-delay: 2000ms;
       animation-fill-mode: backwards;
     }
