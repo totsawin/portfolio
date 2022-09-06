@@ -20,5 +20,8 @@
     "sass": "^1.54.7",
     "styled-components": "^5.3.5",
     "svelte": "^3.50.0"
+  },
+  "dependencies": {
+    "nanostores": "^0.6.0"
   }
 }
