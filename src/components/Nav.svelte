@@ -1,6 +1,7 @@
 <script lang="ts">
-    import config from "./config.js";
-    // import Menu from "./Menu.astro";
+    import { isMobileMenuOpen } from '../store.js';
+    import config from "../config.js";
+    import Menu from "./Menu.svelte";
     import { IconLogo } from "./icons/index.js";
     const { navLinks } = config;
     import { onMount, onDestroy } from 'svelte';
@@ -40,7 +41,7 @@
     }
 </script>
 
-<header class="{scrolledToTop ? '': (scrollDirection === 'up' ? 'scroll-up' : 'scroll-down')}">
+<header class="{scrolledToTop ? '': (scrollDirection === 'up' ? 'scroll-up' : 'scroll-down')}" class:transparent={$isMobileMenuOpen}>
     <nav>
         <div class="logo" tabIndex="-1">
             <a href="/" aria-label="home">
@@ -62,7 +63,7 @@
             </div>
         </div>
 
-        <!-- <Menu /> -->
+        <Menu />
     </nav>
 </header>
 
@@ -103,7 +104,10 @@
         user-select: auto !important;
         backdrop-filter: blur(10px);
         transition: var(--transition);
-
+        &.transparent {
+            background-color: transparent;
+        }
+        
         @media (max-width: 1080px) {
             padding: 0 40px;
         }
