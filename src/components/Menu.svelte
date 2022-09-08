@@ -1,8 +1,88 @@
 <script lang="ts">
-  import { isMobileMenuOpen, toggleMobileMenu, setMobileMenuOpen } from '../store.js';
+  import {
+    isMobileMenuOpen,
+    toggleMobileMenu,
+    setMobileMenuOpen,
+  } from "../store.js";
   import config from "../config.js";
-  // import KEY_CODES from "../utils.js";
-  const { navLinks} = config;
+  import { KEY_CODES } from "../utils.js";
+  import { onDestroy, onMount } from "svelte";
+  const { navLinks } = config;
+  const isRenderingOnServer = typeof document === "undefined" && typeof window === "undefined";
+  let menuFocusables: Element[];
+  let firstFocusableEl: Element;
+  let lastFocusableEl: Element;
+
+  function setFocusables() {
+    const hamburgerฺButton: Element = document.getElementsByClassName('hamburger-button')[0];
+    const links: HTMLCollectionOf<HTMLAnchorElement> = document.getElementsByTagName('nav')[0].getElementsByTagName('a');
+    menuFocusables = [hamburgerฺButton, ...Array.from(links)];
+    firstFocusableEl = menuFocusables[0];
+    lastFocusableEl = menuFocusables[menuFocusables.length - 1];
+  };
+
+  function onKeyDown(e: KeyboardEvent) {
+    switch (e.key) {
+      case KEY_CODES.ESCAPE:
+      case KEY_CODES.ESCAPE_IE11: {
+        setMobileMenuOpen(false);
+        break;
+      }
+
+      case KEY_CODES.TAB: {
+        if (menuFocusables && menuFocusables.length === 1) {
+          e.preventDefault();
+          break;
+        }
+        if (e.shiftKey) {
+          handleBackwardTab(e);
+        } else {
+          handleForwardTab(e);
+        }
+        break;
+      }
+
+      default: {
+        break;
+      }
+    }
+  }
+
+  function handleBackwardTab(e: KeyboardEvent) {
+    if (document.activeElement === firstFocusableEl) {
+      e.preventDefault();
+      lastFocusableEl.focus();
+    }
+  };
+
+  function handleForwardTab(e: KeyboardEvent) {
+    if (document.activeElement === lastFocusableEl) {
+      e.preventDefault();
+      firstFocusableEl.focus();
+    }
+  };
+  function onResize(e) {
+    if (e.currentTarget.innerWidth > 768) {
+      setMobileMenuOpen(false);
+    }
+  };
+
+  onMount(() => {
+    if (isRenderingOnServer) {
+      return;
+    }
+    document.addEventListener("keydown", onKeyDown);
+    window.addEventListener('resize', onResize);
+    setFocusables();
+  });
+
+  onDestroy(() => {
+    if (isRenderingOnServer) {
+      return;
+    }
+    document.removeEventListener("keydown", onKeyDown);
+    window.removeEventListener('resize', onResize);
+  });
 </script>
 
 <div class="menu">
@@ -17,7 +97,11 @@
       </div>
     </button>
 
-    <aside aria-hidden={!$isMobileMenuOpen} tabIndex={$isMobileMenuOpen ? 1 : -1} class:menuOpen={$isMobileMenuOpen}>
+    <aside
+      aria-hidden={!$isMobileMenuOpen}
+      tabIndex={$isMobileMenuOpen ? 1 : -1}
+      class:menuOpen={$isMobileMenuOpen}
+    >
       <nav>
         <ol>
           {#each navLinks as { url, name }}
@@ -110,22 +194,22 @@
       }
     }
     .menuOpen {
-        transition-delay: 0.12s;
-        transform: rotate(225deg);
-        transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-        &:before { 
-          width: 100%;
-          top: 0;
-          opacity: 0;
-          transition: var(--ham-before-active);
-        }
-        &:after {
-          width: 100%;
-          bottom: 0;
-          transform: rotate(-90deg);
-          transition: var(--ham-after-active);
-        }
+      transition-delay: 0.12s;
+      transform: rotate(225deg);
+      transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+      &:before {
+        width: 100%;
+        top: 0;
+        opacity: 0;
+        transition: var(--ham-before-active);
       }
+      &:after {
+        width: 100%;
+        bottom: 0;
+        transform: rotate(-90deg);
+        transition: var(--ham-after-active);
+      }
+    }
   }
   aside {
     display: none;
