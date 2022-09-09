@@ -1,11 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.svelte";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.svelte";
 ---
 
 <Layout title="Totsawin Jangprasert's Portfolio" location={Astro.url}>
 	<main class="fillHeight">
 		<Hero />
+		<About client:load />
 	</main>
 </Layout>
 
