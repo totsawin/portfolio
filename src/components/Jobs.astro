@@ -1,0 +1,18 @@
+---
+import Jobs from "../components/Jobs.svelte";
+const rawJobs = await Astro.glob('../content/jobs/**/index.md');
+const sortedRawJobs = rawJobs.sort(
+	(
+		{ frontmatter: { date: dateA } },
+		{ frontmatter: { date: dateB } },
+	) => new Date(dateB).valueOf() - new Date(dateA).valueOf(),
+);
+
+const jobs = sortedRawJobs.map(
+	({ frontmatter: { title, url, company, range }, compiledContent }) => {
+		return { title, url, company, range, content: compiledContent() };
+	},
+);
+---
+
+<Jobs client:visible  {jobs} />
