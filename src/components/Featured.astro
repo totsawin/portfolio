@@ -1,0 +1,30 @@
+---
+import Featured from "../components/Featured.svelte";
+const relativePath = 'featured';
+const rawFeatures = await Astro.glob('../content/featured/**/index.md');
+const sortedRawFeatures = rawFeatures.sort(
+	(
+		{ frontmatter: { date: dateA } },
+		{ frontmatter: { date: dateB } },
+	) => new Date(dateA).valueOf() - new Date(dateB).valueOf(),
+);
+
+const featuredProjects = sortedRawFeatures.map(
+	({ file, frontmatter: { title, cover, tech, github, external, cta }, compiledContent }) => {
+		return { title, img: getImageURL(file, cover), tech, github, external, cta, content: compiledContent() };
+	},
+);
+
+function getImageURL(file, cover){
+    const folder = getRelativeFilePath(file, 2)
+    const image = getRelativeFilePath(cover, 1)
+    return relativePath + '/' + folder + '/' + image;
+}
+
+function getRelativeFilePath(file, indexFromEnd){
+    const folders = file.split('/');
+    return folders[folders.length-indexFromEnd];
+}
+---
+
+<Featured client:visible  {featuredProjects} />
