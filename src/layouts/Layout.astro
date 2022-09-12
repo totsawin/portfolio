@@ -6,11 +6,12 @@ import Social from "../components/Social.astro";
 import Email from "../components/Email.astro";
 import Nav from "../components/Nav.svelte";
 import Footer from "../components/Footer.astro";
+const seoProps = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
-  <Head title="Totsawin Jangprasert's Portfolio" />
+  <Head {...seoProps} />
   <body>
     <div class="wrapper">
 
