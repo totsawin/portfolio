@@ -1,0 +1,21 @@
+---
+import Projects from "../components/Projects.svelte";
+const relativePath = 'projects';
+const rawProjects = await Astro.glob('../content/projects/*.md');
+const sortedandfilteredRawProjects = rawProjects
+    .filter((project) => project.frontmatter.showInProjects !== false)
+    .sort(
+        (
+            { frontmatter: { date: dateA } },
+            { frontmatter: { date: dateB } },
+        ) => new Date(dateB).valueOf() - new Date(dateA).valueOf(),
+    );
+
+const projects = sortedandfilteredRawProjects.map(
+	({ frontmatter: { title, tech, github, external }, compiledContent }) => {
+		return { title, tech, github, external, content: compiledContent() };
+	},
+);
+---
+
+<Projects client:visible  {projects} />
