@@ -17,9 +17,9 @@
       Some Things I’ve Built
     </h2>
 
-    <ul>
+    <ul class="projects">
         {#each featuredProjects as { folder, external, title, tech, github, img, cta, content }, i}
-            <li>
+            <li class="project">
               <div class="project-content">
                 <div>
                   <p class="project-overline">Featured Project</p>
@@ -76,7 +76,7 @@
     </ul>
   </section>
   <style lang="scss">
-ul {
+.projects {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -87,8 +87,7 @@ ul {
     }
 }
 
-li {
-
+.project {
   position: relative;
   display: grid;
   grid-gap: 10px;
