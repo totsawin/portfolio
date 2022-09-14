@@ -6,7 +6,7 @@ export interface Props {
   isHome: boolean;
 }
 const { socialMedia } = config;
-const { isHome = true } = Astro.props;
+const { isHome } = Astro.props;
 ---
 
 <Side isHome={isHome} orientation="left">

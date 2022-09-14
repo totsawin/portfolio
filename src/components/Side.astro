@@ -3,9 +3,11 @@ export interface Props {
   isHome: boolean;
   orientation: string;
 }
-const { isHome = true,  orientation } = Astro.props;
+const { isHome,  orientation } = Astro.props;
+const delay = isHome ? '2000ms' : '0ms';
+const duration = isHome ? '300ms' : '0ms';
 let leftPosition, rightPosition;
-if(orientation === 'left'){
+if(orientation === 'left') {
   leftPosition = '40px';
   rightPosition = 'auto';
 } else {
@@ -19,7 +21,7 @@ if(orientation === 'left'){
 </div>
 
 
-<style lang="scss" define:vars={{ leftPosition, rightPosition }}>
+<style lang="scss" define:vars={{ leftPosition, rightPosition, duration, delay }}>
   @keyframes fade {
     from {
       opacity: 0;
@@ -46,8 +48,9 @@ if(orientation === 'left'){
       display: none;
     }
     @media (prefers-reduced-motion: no-preference) {
-      animation: fade 300ms var(--easing);
-      animation-delay: 2000ms;
+      animation: fade var(--easing);
+      animation-duration: var(--duration);
+      animation-delay: var(--delay);
       animation-fill-mode: backwards;
     }
   }
