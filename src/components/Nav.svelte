@@ -5,7 +5,9 @@
     import { IconLogo } from "./icons/index.js";
     const { navLinks } = config;
     import { onMount, onDestroy } from 'svelte';
-    // export let isHome;
+    export let isHome;
+    const delay = isHome ? '2000ms' : '0ms';
+    const duration = isHome ? '300ms' : '0ms';
     const isRenderingOnServer = typeof window === 'undefined';
     let lastScrollY = isRenderingOnServer ? 0: window.pageYOffset;
     let scrollDirection = 'down';
@@ -41,7 +43,11 @@
     }
 </script>
 
-<header class="{scrolledToTop ? '': (scrollDirection === 'up' ? 'scroll-up' : 'scroll-down')}" class:transparent={$isMobileMenuOpen}>
+<header 
+    class="{scrolledToTop ? '': (scrollDirection === 'up' ? 'scroll-up' : 'scroll-down')}" 
+    class:transparent={$isMobileMenuOpen}
+    style="--delay: {delay}; --duration: {duration};"
+>
     <nav>
         <div class="logo" tabIndex="-1">
             <a href="/" aria-label="home">
@@ -165,8 +171,9 @@
             }
 
             @media (prefers-reduced-motion: no-preference) {
-                animation: fade 300ms var(--easing);
-                animation-delay: 2000ms;
+                animation: fade var(--easing);
+                animation-duration: var(--duration);
+                animation-delay: var(--delay);
                 animation-fill-mode: backwards;
             }
         }
@@ -206,8 +213,9 @@
                 }
 
                 @media (prefers-reduced-motion: no-preference) {
-                    animation: fade-down 300ms var(--easing);
-                    animation-delay: calc(2000ms + var(--delay-items) * 100ms);
+                    animation: fade-down var(--easing);
+                    animation-duration: var(--duration);
+                    animation-delay: calc(var(--delay) + var(--delay-items) * 100ms);
                     animation-fill-mode: backwards;
                 }
             }
@@ -215,8 +223,9 @@
 
         .resume-button-section {
             @media (prefers-reduced-motion: no-preference) {
-                animation: fade-down 300ms var(--easing);
-                animation-delay: calc(2000ms + var(--delay-items) * 100ms);
+                animation: fade-down var(--easing);
+                animation-duration: var(--duration);
+                animation-delay: calc(var(--delay) + var(--delay-items) * 100ms);
                 animation-fill-mode: backwards;
             }
         }

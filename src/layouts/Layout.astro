@@ -7,6 +7,7 @@ import Email from "../components/Email.astro";
 import Nav from "../components/Nav.svelte";
 import Footer from "../components/Footer.astro";
 const seoProps = Astro.props;
+const isHome = Astro.url.pathname === '/';;
 ---
 
 <!DOCTYPE html>
@@ -15,9 +16,9 @@ const seoProps = Astro.props;
   <body>
     <div class="wrapper">
 
-      <Nav isHome=true client:load/>
-      <Social isHome=true />
-      <Email isHome=true />
+      <Nav isHome={isHome} client:load/>
+      <Social isHome={isHome} />
+      <Email isHome={isHome} />
 
       <Content client:load>
         <slot />
