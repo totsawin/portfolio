@@ -5,7 +5,7 @@ export interface Props {
   isHome: boolean;
 }
 const { email } = config;
-const { isHome = true } = Astro.props;
+const { isHome } = Astro.props;
 ---
 
   <Side isHome={isHome} orientation="right">
