@@ -6,7 +6,7 @@
     const { navLinks } = config;
     import { onMount, onDestroy } from 'svelte';
     export let isHome;
-    const delay = isHome ? '2000ms' : '0ms';
+    const delay = isHome ? '3000ms' : '0ms';
     const duration = isHome ? '300ms' : '0ms';
     const isRenderingOnServer = typeof window === 'undefined';
     let lastScrollY = isRenderingOnServer ? 0: window.pageYOffset;

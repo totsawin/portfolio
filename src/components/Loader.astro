@@ -1,0 +1,100 @@
+---
+import { IconLoader } from "./icons/index.js";
+---
+
+<div class="loader">
+  <div class="logo-wrapper">
+    <IconLoader />
+  </div>
+</div>
+
+<style lang="scss">
+  @keyframes draw-path {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes show-logo {
+    from {
+      opacity: 0.01;
+      transform: translate(11px, 25px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(11px, 5px);
+    }
+  }
+  @keyframes collapse-logo {
+    from {
+      opacity: 1;
+      scale: 1,
+    }
+    to {
+      opacity: 0;
+      scale: 0.1,
+    }
+  }
+  @keyframes hide-loader {
+    from {
+      opacity: 1;
+      z-index: 99;
+    }
+    to {
+      opacity: 0;
+      z-index: -1;
+    }
+  }
+  .loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--dark-navy);
+    z-index: 99;
+    animation: hide-loader 200ms cubic-bezier(0.76, 0, 0.24, 1);
+    animation-delay: 2800ms;
+    animation-fill-mode: forwards;
+
+    .logo-wrapper {
+      width: max-content;
+      max-width: 100px;
+      transition: var(--transition);
+      opacity: 1;
+      :global(#logo) {
+        display: block;
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        fill: none;
+        user-select: none;
+        animation: collapse-logo 300ms cubic-bezier(0.76, 0, 0.24, 1);
+        animation-delay: 2500ms;
+        animation-fill-mode: forwards;
+
+        :global(#B) {
+          animation: show-logo 700ms cubic-bezier(0.76, 0, 0.24, 1);
+          animation-fill-mode: forwards;
+          animation-delay: 1800ms;
+          opacity: 0;
+        }
+
+        :global(path) {
+          stroke-dasharray: 1;
+          stroke-dashoffset: 1;
+          animation: draw-path 1500ms cubic-bezier(0.76, 0, 0.24, 1);
+          animation-delay: 300ms;
+          animation-fill-mode: forwards;
+        }
+      }
+    }
+  }
+</style>
