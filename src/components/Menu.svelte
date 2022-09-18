@@ -4,6 +4,7 @@
     toggleMobileMenu,
     setMobileMenuOpen,
   } from "../store.js";
+  import { clickOutside } from "../clickOutside.js";
   import config from "../config.js";
   import { KEY_CODES } from "../utils.js";
   import { onDestroy, onMount } from "svelte";
@@ -67,6 +68,10 @@
     }
   };
 
+  function handleClickOutside() {
+    setMobileMenuOpen(false);
+  }
+
   onMount(() => {
     if (isRenderingOnServer) {
       return;
@@ -85,7 +90,7 @@
   });
 </script>
 
-<div class="menu">
+<div class="menu" use:clickOutside on:click_outside={handleClickOutside}>
   <div>
     <button
       class="hamburger-button"
