@@ -11,6 +11,8 @@ import {
   IconLinkedin,
   IconLoader,
   IconLogo,
+  IconMedium,
+  IconFacebook,
   IconPlayStore,
   IconStar,
   IconTwitter,
@@ -29,6 +31,9 @@ switch (name) {
         break;
     case 'External':
         Component = IconExternal;
+        break;
+    case 'Facebook':
+        Component = IconFacebook;
         break;
     case 'Folder':
         Component = IconFolder;
@@ -50,6 +55,8 @@ switch (name) {
         break;
     case 'Logo':
         Component = IconLogo;
+    case 'Medium':
+        Component = IconMedium;
         break;
     case 'PlayStore':
         Component = IconPlayStore;
