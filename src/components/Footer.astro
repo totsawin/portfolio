@@ -50,6 +50,10 @@ const githubInfo: GithubInfo = {
                 )
             }
         </a>
+
+        <a href="https://github.com/totsawin/portfolio">
+            <div>Reimplemented in Astro by Totsawin Jangprasert</div>
+        </a>
     </div>
 </footer>
 
@@ -97,6 +101,9 @@ const githubInfo: GithubInfo = {
     }
 
     .credit {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
         color: var(--light-slate);
         font-family: var(--font-mono);
         font-size: var(--fz-xxs);
@@ -107,7 +114,7 @@ const githubInfo: GithubInfo = {
         }
 
         .github-stats {
-            margin-top: 10px;
+            margin-top: 8px;
 
             & > span {
                 display: inline-flex;
