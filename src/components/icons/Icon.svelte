@@ -70,4 +70,4 @@ switch (name) {
         Component = IconExternal;
 };
 </script>
-<Component />
+<svelte:component this={Component}/>
