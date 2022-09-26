@@ -2,7 +2,7 @@
     import { isMobileMenuOpen } from '../store.js';
     import config from "../config.js";
     import Menu from "./Menu.svelte";
-    import { IconLogo } from "./icons/index.js";
+    import IconLogo from "./icons/logo.svelte";
     const { navLinks } = config;
     import { onMount, onDestroy } from 'svelte';
     export let isHome;

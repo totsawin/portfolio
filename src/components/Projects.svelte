@@ -1,5 +1,7 @@
 <script lang="ts">
-    import { IconFolder, IconGitHub, IconExternal }  from "./icons/index.js";
+    import IconGitHub from "./icons/github.svelte";
+    import IconExternal from "./icons/external.svelte";
+    import IconFolder from "./icons/folder.svelte";
     interface Project {
         external: string;
         title: string;
