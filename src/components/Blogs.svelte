@@ -1,5 +1,4 @@
 <script lang="ts">
-import Linkedin from "./icons/linkedin.svelte";
 
     interface MediumArticle {
         author: string;
