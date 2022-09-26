@@ -1,5 +1,5 @@
 ---
-import Icon from "./icons/icon.svelte";
+import { IconGitHub, IconExternal } from "./icons/index.js";
 import { Image } from '@astrojs/image/components';
 interface FeaturedProject {
 	folder: string;
@@ -73,12 +73,12 @@ function getRelativeFilePath(file, indexFromEnd){
 							)}
 							{github && (
 							<a href={github} aria-label="GitHub Link">
-								<Icon name="GitHub" />
+								<IconGitHub />
 							</a>
 							)}
 							{external && !cta && (
 							<a href={external} aria-label="External Link" class="external">
-								<Icon name="External" />
+								<IconExternal />
 							</a>
 							)}
 						</div>
