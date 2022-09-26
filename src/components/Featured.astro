@@ -89,7 +89,7 @@ function getRelativeFilePath(file, indexFromEnd){
               <div class="project-image">
                 <a href={external ? external : github ? github : '#'}>
 					<Image  
-						src={import(`../assets/images/${img}`)} 
+						src={import(/* @vite-ignore */`../assets/images/${img}`)} 
 						alt="project screen capture" 
 						class="img"
 					/>
