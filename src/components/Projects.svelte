@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Icon from "./icons/icon.svelte";
+    import { IconFolder, IconGitHub, IconExternal }  from "./icons/index.js";
     interface Project {
         external: string;
         title: string;
@@ -31,12 +31,12 @@
                     <header>
                       <div class="project-top">
                         <div class="folder">
-                          <Icon name="Folder" />
+                          <IconFolder />
                         </div>
                         <div class="project-links">
                             {#if github}
                                 <a href={github} aria-label="GitHub Link" target="_blank" rel="noreferrer">
-                                <Icon name="GitHub" />
+                                <IconGitHub />
                                 </a>
                             {/if}
                             {#if external}
@@ -46,7 +46,7 @@
                                 class="external"
                                 target="_blank"
                                 rel="noreferrer">
-                                <Icon name="External" />
+                                <IconExternal />
                                 </a>
                             {/if}
                         </div>
