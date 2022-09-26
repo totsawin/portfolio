@@ -122,13 +122,13 @@
         }
 
         @media (prefers-reduced-motion: no-preference) {
-            .scroll-up {
+            &.scroll-up {
                 height: var(--nav-scroll-height);
                 transform: translateY(0px);
                 background-color: rgba(10, 25, 47, 0.85);
                 box-shadow: 0 10px 30px -10px var(--navy-shadow);
             }
-            .scroll-down {
+            &.scroll-down {
                 height: var(--nav-scroll-height);
                 transform: translateY(calc(var(--nav-scroll-height) * -1));
                 box-shadow: 0 10px 30px -10px var(--navy-shadow);
