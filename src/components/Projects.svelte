@@ -19,7 +19,7 @@
         showMore = flag;
     }
 </script>
-<section>
+<section id="projects" class="scroll-reveal">
     <h2>Other Noteworthy Projects</h2>
 
     <a class="inline-link archive-link" href="/archive">

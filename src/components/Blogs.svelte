@@ -21,7 +21,7 @@
         showMore = flag;
     }
 </script>
-<section id="blogs">
+<section id="blogs" class="scroll-reveal">
     <h2>Blogs</h2>
 
     <a class="inline-link archive-link" href="https://totsawin-jangprasert.medium.com/" target="_blank" rel="noreferrer">

@@ -13,7 +13,6 @@ const seoProps = {
 	location: Astro.url
 };
 ---
-
 <Layout {...seoProps}>
 	<main class="fillHeight">
 		<Hero />
@@ -31,3 +30,27 @@ const seoProps = {
 		counter-reset: section;
 	}
 </style>
+<script>
+
+	setTimeout(() => {
+		const animations = [...document.querySelectorAll('.scroll-reveal')]
+
+		const options = {
+			threshold: 0.25
+		}
+  
+		// create observer
+		const callback = entries => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('active')
+				}
+			})
+		}
+
+		const observer = new IntersectionObserver(callback, options);
+	
+		// observe boxes
+		animations.forEach(animation => observer.observe(animation));
+	}, 2000);
+</script>
