@@ -1,7 +1,7 @@
 ---
 date: '2'
 title: 'Y.isYo'
-cover: './demo.png'
+cover: './demo'
 github: ''
 external: 'https://yisyo.com/'
 tech:

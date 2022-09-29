@@ -1,7 +1,7 @@
 ---
 date: '1'
 title: 'My Portfolio'
-cover: './demo.png'
+cover: './demo'
 github: 'https://github.com/totsawin/portfolio'
 external: 'https://www.totsawin.com/'
 tech:

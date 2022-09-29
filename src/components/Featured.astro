@@ -88,9 +88,35 @@ function getRelativeFilePath(file, indexFromEnd){
               <div class="project-image">
                 <a href={external ? external : github ? github : '#'}>
 					<picture>
-						<source srcset={`images/${img}`} />
-						<img src={`images/${img}`} alt={title} class="img" />
-                  	</picture>
+						<source
+							sizes="(max-width: 768px) 100vw, 608px"
+							srcset={`	
+								images/${img}-1920w.avif 1920w,
+								images/${img}-1280w.avif 1280w, 
+								images/${img}-640w.avif 640w, 
+								images/${img}-320w.avif 320w`}
+							type="image/avif"
+						/>
+						<source
+							sizes="(max-width: 768px) 100vw, 608px"
+							srcset={`	
+								images/${img}-1920w.webp 1920w,
+								images/${img}-1280w.webp 1280w, 
+								images/${img}-640w.webp 640w, 
+								images/${img}-320w.webp 320w`}
+							type="image/webp"
+						/>
+						<source
+							sizes="(max-width: 768px) 100vw, 608px"
+							srcset={`	
+								images/${img}-1920w.jpg 1920w,
+								images/${img}-1280w.jpg 1280w, 
+								images/${img}-640w.jpg 640w, 
+								images/${img}-320w.jpg 320w`}
+							type="image/jpg"
+						/>
+						<img src={`images/${img}-640w.jpg`} alt={title} class="img" width="640" height="340">
+					</picture>
                 </a>
               </div>
             </li> 
