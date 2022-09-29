@@ -21,16 +21,16 @@
         showMore = flag;
     }
 </script>
-<section id="blogs" class="scroll-reveal">
-    <h2>Blogs</h2>
+<section id="blogs">
+    <h2 class="scroll-reveal">Blogs</h2>
 
-    <a class="inline-link archive-link" href="https://totsawin-jangprasert.medium.com/" target="_blank" rel="noreferrer">
+    <a class="inline-link archive-link scroll-reveal" href="https://totsawin-jangprasert.medium.com/" target="_blank" rel="noreferrer">
       view all
     </a>
 
     <ul class="articles-grid">
         {#each shownArticles as { categories, content, description, link, pubDate, title }, i}
-            <li>
+            <li class="scroll-reveal">
                 <div class="article-inner">
                     <header>
                         <h3 class="article-title">

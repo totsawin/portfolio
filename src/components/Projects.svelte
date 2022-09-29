@@ -19,16 +19,16 @@
         showMore = flag;
     }
 </script>
-<section id="projects" class="scroll-reveal">
-    <h2>Other Noteworthy Projects</h2>
+<section id="projects">
+    <h2 class="scroll-reveal">Other Noteworthy Projects</h2>
 
-    <a class="inline-link archive-link" href="/archive">
+    <a class="inline-link archive-link scroll-reveal" href="/archive">
       view the archive
     </a>
 
     <ul class="projects-grid">
         {#each shownProjects as { github, external, title, tech, content }, i}
-            <li>
+            <li class="scroll-reveal">
                 <div class="project-inner">
                     <header>
                       <div class="project-top">

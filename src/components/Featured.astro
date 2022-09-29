@@ -39,7 +39,7 @@ function getRelativeFilePath(file, indexFromEnd){
 }
 ---
 
-<section id="projects" class="scroll-reveal">
+<section id="projects">
     <h2 class="numbered-heading">
       Some Things I’ve Built
     </h2>
@@ -47,7 +47,7 @@ function getRelativeFilePath(file, indexFromEnd){
     {featuredProjects && (
 		<ul class="projects">
 		{ featuredProjects.map(({ folder, external, title, aspectRatio, tech, github, img, cta, content }, i) => (
-            <li class="project">
+            <li class="project scroll-reveal">
                 <div class="project-content">
 					<div>
 						<p class="project-overline">Featured Project</p>
