@@ -1,7 +1,6 @@
 ---
 import IconGitHub from "./icons/github.svelte";
 import IconExternal from "./icons/external.svelte";
-import { Image } from '@astrojs/image/components';
 interface FeaturedProject {
 	folder: string;
 	external: string;
@@ -88,11 +87,10 @@ function getRelativeFilePath(file, indexFromEnd){
 
               <div class="project-image">
                 <a href={external ? external : github ? github : '#'}>
-					<Image  
-						src={import(/* @vite-ignore */`../assets/images/${img}`)} 
-						alt="project screen capture" 
-						class="img"
-					/>
+					<picture>
+						<source srcset={`images/${img}`} />
+						<img src={`images/${img}`} alt={title} class="img" />
+                  	</picture>
                 </a>
               </div>
             </li> 
