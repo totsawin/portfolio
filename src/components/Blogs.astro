@@ -27,12 +27,12 @@ export interface MediumArticle {
 const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@totsawin-jangprasert');
 const data = await response.json();
 const unsortedArticles = data.items;
-const articles = unsortedArticles.sort(
+const articles = unsortedArticles ? unsortedArticles.sort(
         (
             { date: dateA },
             { date: dateB },
         ) => new Date(dateB).valueOf() - new Date(dateA).valueOf(),
-    );
+    ): [];
 ---
 
 <Blogs client:visible  {articles} />
