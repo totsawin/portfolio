@@ -5,7 +5,7 @@
     import IconLogo from "./icons/logo.svelte";
     const { navLinks } = config;
     import { onMount, onDestroy } from 'svelte';
-    export let isHome;
+    export let isHome: boolean;
     const delay = isHome ? '3000ms' : '0ms';
     const duration = isHome ? '300ms' : '0ms';
     const isRenderingOnServer = typeof window === 'undefined';
@@ -57,12 +57,12 @@
         <div class="links">
             <ol>
                 {#each navLinks as { url, name }, index}
-                    <li style:--delay-items={index}>
+                    <li style:--delay-items={isHome ? index: 0}>
                         <a href={url}>{name}</a>
                     </li>
                 {/each}
             </ol>
-            <div class="resume-button-section" style:--delay-items={navLinks.length}>
+            <div class="resume-button-section" style:--delay-items={isHome ? navLinks.length: 0}>
                 <a class="resume-button" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
                     Resume
                 </a>

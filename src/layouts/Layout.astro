@@ -15,7 +15,10 @@ const isHome = Astro.url.pathname === '/';
 <html lang="en">
   <Head {...seoProps} />
   <body>
-    <Loader />
+    {isHome && (
+      <Loader />
+    )}
+    
     <div class="wrapper">
 
       <Nav isHome={isHome} client:load/>
