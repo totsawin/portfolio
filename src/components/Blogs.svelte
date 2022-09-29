@@ -22,11 +22,9 @@
     }
 </script>
 <section id="blogs">
-    <h2 class="scroll-reveal">Blogs</h2>
-
-    <a class="inline-link archive-link scroll-reveal" href="https://totsawin-jangprasert.medium.com/" target="_blank" rel="noreferrer">
-      view all
-    </a>
+    <h2 class="numbered-heading">
+        What I've wrote
+    </h2>
 
     <ul class="articles-grid">
         {#each shownArticles as { categories, content, description, link, pubDate, title }, i}
