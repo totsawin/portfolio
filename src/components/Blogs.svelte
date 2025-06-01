@@ -28,7 +28,7 @@
 
     <ul class="articles-grid">
         {#each shownArticles as { categories, content, description, link, pubDate, title }, i}
-            <li class="scroll-reveal">
+            <li class="scroll-reveal active">
                 <div class="article-inner">
                     <header>
                         <h3 class="article-title">
